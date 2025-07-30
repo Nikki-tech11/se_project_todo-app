@@ -31,6 +31,20 @@ class Todo {
 
     todoNameEl.textContent = this._data.name;
 
+    if (this._data.date) {
+      const formattedDate = new Date(this._data.date).toLocaleDateString(
+        "en-US",
+        {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        }
+      );
+      todoDate.textContent = `Due: ${formattedDate}`;
+    } else {
+      todoDate.textContent = "No due date"; // Placeholder if no date is provided
+    }
+
     this._generateCheckboxEl(this._todoElement);
 
     return this._todoElement;
