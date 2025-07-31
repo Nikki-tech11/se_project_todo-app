@@ -16,6 +16,20 @@ class Todo {
     });
   }
 
+  _setEventListeners() {
+    this._todoDeleteBtn.addEventListener("click", () => {
+      this._todoElement.remove();
+      console.log(`Todo "${this._data.name}" has been deleted.`);
+    });
+
+    this._todoCheckboxEl.addEventListener("change", () => {
+      this._data.completed = !this._data.completed;
+      console.log(
+        `Todo "${this._data.name}" completed state: ${this._data.completed}`
+      );
+    });
+  }
+
   getView() {
     this._todoElement = this._templateElement.content
       .querySelector(".todo")
@@ -42,10 +56,12 @@ class Todo {
       );
       todoDate.textContent = `Due: ${formattedDate}`;
     } else {
-      todoDate.textContent = "No due date"; // Placeholder if no date is provided
+      todoDate.textContent = "No due date";
     }
 
     this._generateCheckboxEl(this._todoElement);
+
+    this._setEventListeners();
 
     return this._todoElement;
   }
