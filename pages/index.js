@@ -26,7 +26,6 @@ const generateTodo = (data) => {
 };
 
 const renderTodo = (item) => {
-  console.log("Rendering todo:", item);
   const todo = generateTodo(item);
   todosList.append(todo);
 };
@@ -44,14 +43,13 @@ addTodoForm.addEventListener("submit", (evt) => {
   const name = evt.target.name.value;
   const dateInput = evt.target.date.value;
 
-  // Create a date object and adjust for timezone
   const date = new Date(dateInput);
   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
 
   const id = uuidv4();
   const values = { name, date, id };
-  const todo = renderTodo(values);
-  todosList.append(todo);
+
+  renderTodo(values);
   closeModal(addTodoPopup);
 });
 

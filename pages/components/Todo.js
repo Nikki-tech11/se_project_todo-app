@@ -10,10 +10,6 @@ class Todo {
     this._todoCheckboxEl.checked = this._data.completed;
     this._todoCheckboxEl.id = `todo-${this._data.id}`;
     this._todoLabel.setAttribute("for", `todo-${this._data.id}`);
-
-    this._todoCheckboxEl.addEventListener("change", (evt) => {
-      this._data.completed = !this._data.completed;
-    });
   }
 
   _setEventListeners() {
@@ -24,9 +20,6 @@ class Todo {
 
     this._todoCheckboxEl.addEventListener("change", () => {
       this._data.completed = !this._data.completed;
-      console.log(
-        `Todo "${this._data.name}" completed state: ${this._data.completed}`
-      );
     });
   }
 
@@ -37,11 +30,6 @@ class Todo {
     const todoNameEl = this._todoElement.querySelector(".todo__name");
     const todoDate = this._todoElement.querySelector(".todo__date");
     this._todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
-
-    this._todoDeleteBtn.addEventListener("click", (evt) => {
-      this._todoElement.remove();
-      console.log(`Todo "${this._data.name}" has been deleted.`);
-    });
 
     todoNameEl.textContent = this._data.name;
 
