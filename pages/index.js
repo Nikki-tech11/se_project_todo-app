@@ -43,13 +43,19 @@ addTodoForm.addEventListener("submit", (evt) => {
   const name = evt.target.name.value;
   const dateInput = evt.target.date.value;
 
-  const date = new Date(dateInput);
-  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+  // const date = new Date(dateInput);
+  // date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+  const date = dateInput ? new Date(dateInput) : null;
+
+  if (date) {
+    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+  }
 
   const id = uuidv4();
   const values = { name, date, id };
 
   renderTodo(values);
+  newTodoFormValidator.resetValidation();
   closeModal(addTodoPopup);
 });
 
@@ -59,3 +65,9 @@ initialTodos.forEach((item) => {
 
 const newTodoFormValidator = new FormValidator(validationConfig, addTodoForm);
 newTodoFormValidator.enableValidation();
+
+// This file acts as the main controller for the app.
+// Responsibilities:
+// - Handle user interactions (e.g., form submissions, button clicks).
+// - Prepare data for rendering.
+// - Call methods from other classes (e.g., Todo, FormValidator).

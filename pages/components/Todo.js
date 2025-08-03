@@ -56,3 +56,8 @@ class Todo {
 }
 
 export default Todo;
+
+// This class represents a single todo item.
+// Responsibilities:
+// - Render the todo in the UI.
+// - Handle actions specific to the todo (e.g., delete, mark as completed).
