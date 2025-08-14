@@ -27,4 +27,4 @@ UUID: Used to generate unique IDs for each to-do item.
 
 This project is deployed on GitHub Pages:
 
-- ADD LINK HERE
+https://nikki-tech11.github.io/se_project_todo-app/
