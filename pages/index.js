@@ -39,15 +39,10 @@ const generateTodo = (data) => {
 const taskSection = new Section({
   items: initialTodos, // Initial list of todos
   renderer: (item) => {
-    // Generate a todo element and add it to the section
-    const todoElement = generateTodo(item);
-    taskSection.addItem(todoElement);
+    renderTodo(item); // Reuse the renderTodo function
   },
   containerSelector: ".todos__list", // Selector for the container
 });
-
-// Render the initial list of todos
-taskSection.renderItems();
 
 const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
@@ -129,6 +124,9 @@ addTodoButton.addEventListener("click", () => {
 
 const newTodoFormValidator = new FormValidator(validationConfig, addTodoForm);
 newTodoFormValidator.enableValidation();
+
+// Render the initial list of todos
+taskSection.renderItems();
 
 // This file acts as the main controller for the app.
 // Responsibilities:
