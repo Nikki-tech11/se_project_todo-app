@@ -105,7 +105,7 @@ function handleCheck(completed) {
 }
 
 function handleDelete(completed) {
-  if (!completed) {
+  if (completed) {
     todoCounter.updateCompleted(false);
   }
   todoCounter.updateTotal(false);

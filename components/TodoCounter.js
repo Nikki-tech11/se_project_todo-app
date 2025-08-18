@@ -1,53 +1,75 @@
 class TodoCounter {
-  // todos should be the array of initial todos
-  // selector is the selector for the counter text element
+  // Constructor initializes the counter with the initial todos and the selector for the counter element
   constructor(todos, selector) {
+    // Select the DOM element where the counter text will be displayed
     this._element = document.querySelector(selector);
+
+    // Calculate the initial number of completed todos
     this._completed = todos.filter((todo) => todo.completed).length;
+
+    // Set the total number of todos
     this._total = todos.length;
+
+    // Update the counter text in the UI
     this._updateText();
   }
 
-  // Call this when a checkbox is clicked, and when a completed
-  // to-do is deleted.
-  updateCompleted = (increment) => {
-    // Increment or decrement the completed count
+  // Method to update the completed count when a checkbox is toggled
+  updateCompleted(increment) {
     if (increment) {
+      // Increment the completed count if the checkbox is checked
       this._completed += 1;
     } else {
+      // Decrement the completed count if the checkbox is unchecked
       this._completed -= 1;
+
+      // Ensure the completed count doesn't go below zero
       if (this._completed < 0) {
-        this._completed = 0; // Ensure completed count doesn't go below zero
+        this._completed = 0;
       }
     }
-    this._updateText();
-  };
 
-  // Call this when a to-do is deleted, or when a to-do is
-  // created via the form.
-  updateTotal = (increment) => {
-    // Increment or decrement the total count
-    if (increment) {
+    // Update the counter text in the UI
+    this._updateText();
+  }
+
+  // Method to update the total count when a todo is added or deleted
+  updateTotal(isAdding) {
+    if (isAdding) {
+      // Increment the total count if a new todo is added
       this._total += 1;
     } else {
+      // Decrement the total count if a todo is deleted
       this._total -= 1;
+
+      // Ensure the total count doesn't go below zero
       if (this._total < 0) {
-        this._total = 0; // Ensure total count doesn't go below zero
+        this._total = 0;
       }
     }
 
-    // Reset completed count if there are no todos left
+    // If there are no todos left, reset the completed count to zero
     if (this._total === 0) {
       this._completed = 0;
     }
 
+    // Update the counter text in the UI
     this._updateText();
-  };
-  // Call the method to update the text content
+  }
+
+  // Method to recalculate the completed count based on the current state of todos
+  recalculateCompleted(todos) {
+    // Recalculate the number of completed todos
+    this._completed = todos.filter((todo) => todo.completed).length;
+
+    // Update the counter text in the UI
+    this._updateText();
+  }
+
+  // Private method to update the text content of the counter element in the UI
   _updateText() {
-    // Sets the text content of corresponding text element.
-    // Call this in the constructor, and whenever the counts get updated.
-    this._element.textContent = `Showing ${this._completed} out of ${this._total} completed`;
+    // Set the text content to display the number of completed and total todos
+    this._element.textContent = `Completed: ${this._completed} / Total: ${this._total}`;
   }
 }
 
