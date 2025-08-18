@@ -11,13 +11,14 @@ class TodoCounter {
   // Call this when a checkbox is clicked, and when a completed
   // to-do is deleted.
   updateCompleted = (increment) => {
-    // if increment is true, add 1 to this._completed. Otherwise,
-    // subtract 1. In either case, call the method to update
-    // the text content.
+    // Increment or decrement the completed count
     if (increment) {
       this._completed += 1;
     } else {
       this._completed -= 1;
+      if (this._completed < 0) {
+        this._completed = 0; // Ensure completed count doesn't go below zero
+      }
     }
     this._updateText();
   };
@@ -25,17 +26,23 @@ class TodoCounter {
   // Call this when a to-do is deleted, or when a to-do is
   // created via the form.
   updateTotal = (increment) => {
-    // if increment is true, add 1 to this._total. Otherwise,
-    // subtract 1. In either case, call the method to update the
-    // text content.
+    // Increment or decrement the total count
     if (increment) {
       this._total += 1;
     } else {
       this._total -= 1;
+      if (this._total < 0) {
+        this._total = 0; // Ensure total count doesn't go below zero
+      }
     }
+
+    // Reset completed count if there are no todos left
+    if (this._total === 0) {
+      this._completed = 0;
+    }
+
     this._updateText();
   };
-
   // Call the method to update the text content
   _updateText() {
     // Sets the text content of corresponding text element.

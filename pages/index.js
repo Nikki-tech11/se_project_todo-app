@@ -24,8 +24,7 @@ const generateTodo = (data) => {
     data, // Data for the todo item
     "#todo-template", // Template selector
     handleCheck, // Function to handle checkbox changes
-    handleDelete, // Function to handle deletion
-    handleUpdate // Function to handle updates
+    handleDelete // Function to handle deletion
   );
 
   // Get the DOM element for the todo item
@@ -100,6 +99,8 @@ addTodoPopup.setEventListeners();
 function handleCheck(completed) {
   if (completed) {
     todoCounter.updateCompleted(true);
+  } else {
+    todoCounter.updateCompleted(false);
   }
 }
 
@@ -108,14 +109,6 @@ function handleDelete(completed) {
     todoCounter.updateCompleted(false);
   }
   todoCounter.updateTotal(false);
-}
-
-function handleUpdate(updatedData) {
-  if (updatedData.completed) {
-    todoCounter.updateCompleted(true);
-  } else {
-    todoCounter.updateCompleted(false);
-  }
 }
 
 addTodoButton.addEventListener("click", () => {
